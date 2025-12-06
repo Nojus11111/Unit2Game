@@ -1224,7 +1224,7 @@ MonoBehaviour:
   moveSpeed: 5
   shot: {fileID: 8780821326579638132, guid: 2fe79b4e2aa410e4684806a62a7f7f41, type: 3}
   bigShot: {fileID: 3204274630633988594, guid: 1d3da6f1c296b674c8bd6d8ea6b78bb0, type: 3}
-  chargeTime: 1
+  chargeTime: 0.8
   shootDelay: 0.2
   chargeIndicator: {fileID: 1480097387}
 --- !u!212 &625352744
