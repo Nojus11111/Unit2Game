@@ -7,9 +7,13 @@ public class Player : MonoBehaviour
     public GameObject AttackUI;
     public bool canAttack = true;
     public int health;
+    public float iFrames;
+    private float timer;
+    private bool invincible;
     void Start()
     {
         GameManager = GameObject.FindWithTag("Manager");
+        invincible = false;
     }
     void Update()
     {
@@ -23,6 +27,15 @@ public class Player : MonoBehaviour
         {
             AttackUI.SetActive(false);
         }
+        if (invincible)
+        {
+            timer += Time.deltaTime;
+            if (timer > iFrames)
+            {
+                timer = 0;
+                invincible = false;
+            }
+        }
     }
     public void disableAttack()
     {
@@ -30,6 +43,11 @@ public class Player : MonoBehaviour
     }
     public void takeDamage(int damage)
     {
-        health -= damage;
+        if (!invincible)
+        {
+            health -= damage;
+            Debug.Log("hit");
+            invincible = true;
+        }
     }
 }
