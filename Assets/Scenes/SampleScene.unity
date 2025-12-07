@@ -2522,7 +2522,7 @@ MonoBehaviour:
   attacking: 0
   AttackUI: {fileID: 895635838}
   canAttack: 1
-  health: 30
+  health: 160
   iFrames: 1
   blocking: 0
   actionDelay: 0
@@ -2532,6 +2532,7 @@ MonoBehaviour:
   itemIcon: {fileID: 986206264}
   defendIcon: {fileID: 148524934}
   actionUI: {fileID: 949530408}
+  healthDisplay: {fileID: 1506271490}
 --- !u!212 &1399959282
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3016,7 +3017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!102 &1639428949
 TextMesh:
   serializedVersion: 3
