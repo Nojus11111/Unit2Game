@@ -18,11 +18,13 @@ public class Boss : MonoBehaviour
     private float spawnTimer;
     private Vector3 position;
     private bool attackStarted;
+    private GameObject player;
     void Start()
     {
         GameManager = GameObject.FindWithTag("Manager");
         attackDuration = 8;
         attackStarted = false;
+        player = GameObject.FindWithTag("Player");
     }
     void Update()
     {
@@ -51,6 +53,9 @@ public class Boss : MonoBehaviour
                 attackDuration = 8;
                 battleBox.SetActive(false);
                 attackStarted = false;
+                player.GetComponent<Player>().blocking = false;
+                player.GetComponent<Player>().actionDelay = 0;
+                player.GetComponent<Player>().actionUI.SetActive(true);
             }
         }
     }

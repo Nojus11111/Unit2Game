@@ -148,12 +148,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdedc814decf06a48b07af6610fe40bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 12.5
   shootDelay: 1
   bullet: {fileID: 3138961420538057979, guid: d783fae43402a974982310f9e80f854d, type: 3}
   shootPos: {fileID: 2621672550332278854}
   minSpeed: 5
-  slowRate: 0.05
+  slowRate: 0.075
   damage: 5
 --- !u!50 &8164407325972017229
 Rigidbody2D:
@@ -241,3 +241,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 2.5
+  attack: 1
