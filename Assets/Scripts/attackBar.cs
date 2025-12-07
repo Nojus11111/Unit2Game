@@ -45,7 +45,7 @@ public class attackBar : MonoBehaviour
             player.GetComponent<Player>().attacking = false;
             player.GetComponent<Player>().canAttack = true;
             transform.position = startPoint.position;
-            canHit= false;
+            canHit = false;
             GameManager.GetComponent<GameManager>().playerTurn = false;
         }
         if (Input.GetKey(KeyCode.Z) && !damaging && canHit)

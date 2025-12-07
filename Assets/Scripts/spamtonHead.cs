@@ -26,7 +26,7 @@ public class spamtonHead : MonoBehaviour
             Instantiate(bullet, shootPos.position, shootPos.rotation);
             timer = 0;
         }
-        if (transform.position.x < 2 &&  transform.position.x > -1.5 && rb.linearVelocityX < -minSpeed)
+        if (transform.position.x < 3 &&  transform.position.x > -1.5 && rb.linearVelocityX < -minSpeed)
         {
             rb.linearVelocityX += slowRate;
         }
