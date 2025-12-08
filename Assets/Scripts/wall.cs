@@ -9,7 +9,7 @@ public class wall : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.linearVelocityX = -speed;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) // destroys any bullets it touches
     {
         if (collision.gameObject.tag == "bullet")
         {

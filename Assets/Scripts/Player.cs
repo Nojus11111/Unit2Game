@@ -32,13 +32,13 @@ public class Player : MonoBehaviour
     void Update()
     {
         actionDelay += Time.deltaTime;
-        if (actionDelay < 0.5)
+        if (actionDelay < 0.5) // prevents the player from accidentally picking an option immediately as the turn starts by adding a delay before they can pick anything
         {
             return;
         }
         if (GameManager.GetComponent<GameManager>().playerTurn == true)
         {
-            healthDisplay.GetComponent<TextMesh>().text = health.ToString() + "/" + maxHealth.ToString();
+            healthDisplay.GetComponent<TextMesh>().text = health.ToString() + "/" + maxHealth.ToString(); // display health
             if (selected < 1)
             {
                 selected = 1;
@@ -49,25 +49,25 @@ public class Player : MonoBehaviour
             }
             switch (selected)
             {
-                case 1:
+                case 1: // highlight FIGHT
                     fightIcon.SetActive(true);
                     actIcon.SetActive(false);
                     itemIcon.SetActive(false);
                     defendIcon.SetActive(false);
                 break;
-                case 2:
+                case 2: // highlight ACT
                     fightIcon.SetActive(false);
                     actIcon.SetActive(true);
                     itemIcon.SetActive(false);
                     defendIcon.SetActive(false);
                 break;
-                case 3:
+                case 3: // highlight ITEM
                     fightIcon.SetActive(false);
                     actIcon.SetActive(false);
                     itemIcon.SetActive(true);
                     defendIcon.SetActive(false);
                 break;
-                case 4:
+                case 4: // highlight DEFEND
                     fightIcon.SetActive(false);
                     actIcon.SetActive(false);
                     itemIcon.SetActive(false);
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
         {
             switch (selected)
             {
-                case 1: //fight
+                case 1: // FIGHT
                     if (canAttack)
                     {
                         attacking = true;
@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
                         actionUI.SetActive(false);
                     }
                 break;
-                case 2: //act
+                case 2: // ACT
                     if (TP >= 30)
                     {
                         TP -= 30;
@@ -106,12 +106,12 @@ public class Player : MonoBehaviour
                         actionUI.SetActive(false);
                     }
                 break;
-                case 3: //item
+                case 3: // ITEM
                     heal(20);
                     GameManager.GetComponent<GameManager>().playerTurn = false;
                     actionUI.SetActive(false);
                 break;
-                case 4: //defend
+                case 4: // DEFEND
                     blocking = true;
                     TP += 16;
                     GameManager.GetComponent<GameManager>().playerTurn = false;
@@ -123,7 +123,7 @@ public class Player : MonoBehaviour
         {
             AttackUI.SetActive(false);
         }
-        if (invincible)
+        if (invincible) // i frames
         {
             timer += Time.deltaTime;
             if (timer > iFrames)
@@ -133,7 +133,7 @@ public class Player : MonoBehaviour
             }
         }
     }
-    public void disableAttack()
+    public void disableAttack() // prevents the attack code from running multiple times
     {
         canAttack = false;
     }
@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
     {
         if (!invincible)
         {
-            if (blocking)
+            if (blocking) // reduce damage if blocking
             {
                 damage = damage / 2;
             }

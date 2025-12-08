@@ -19,16 +19,18 @@ public class Soul : MonoBehaviour
     }
     void Update()
     {
-        //movement
+        // movement
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
         moveDirection = new Vector2(moveX, moveY).normalized;
-        rb.linearVelocity = new Vector2(moveX * moveSpeed, moveY * moveSpeed);
+        rb.linearVelocity = new Vector2(moveX * moveSpeed, moveY * moveSpeed); // rb.linearVelocity should be fine here since the only physical collision in this game is between the soul and the battlebox walls, eveything else uses triggers
+
+        // shooting
         if (shootTimer <= shootDelay)
         {
             shootTimer += Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.Z) && shootTimer > shootDelay)
+        if (Input.GetKey(KeyCode.Z) && shootTimer > shootDelay) // charge
         {
             chargeTimer += Time.deltaTime;
             if (chargeTimer > chargeTime)
@@ -36,7 +38,7 @@ public class Soul : MonoBehaviour
                 chargeIndicator.SetActive(true);
             }
         }
-        if (Input.GetKeyUp(KeyCode.Z) && shootTimer > shootDelay)
+        if (Input.GetKeyUp(KeyCode.Z) && shootTimer > shootDelay) // release/shoot
         {
             if (chargeTimer > chargeTime)
             {

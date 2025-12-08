@@ -15,11 +15,13 @@ public class spamtonHead : MonoBehaviour
     public float speed2;
     public bool useSpeed2;
     private GameObject gameManager;
+    private Animator animator;
     void Start()
     {
         gameManager = GameObject.FindWithTag("Manager");
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        if (gameManager.GetComponent<GameManager>().turn == 2)
+        if (gameManager.GetComponent<GameManager>().turn == 2) // changes speed on the second attack
         {
             useSpeed2 = true;
             GetComponent<despawner>().lifetime = 3;
@@ -37,23 +39,29 @@ public class spamtonHead : MonoBehaviour
         {
             rb.linearVelocityX = -speed2;
         }
-            Player = GameObject.FindWithTag("Player");
+        Player = GameObject.FindWithTag("Player");
     }
     void Update()
     {
+        // shooting
         timer += Time.deltaTime;
+        if (timer > shootDelay * 0.8)
+        {
+            animator.Play("shoot");
+        }
         if (timer > shootDelay)
         {
             Instantiate(bullet, shootPos.position, shootPos.rotation);
             timer = 0;
         }
+        
         if (!useSpeed2)
         {
-            if (transform.position.x < 3 && transform.position.x > -1.5 && rb.linearVelocityX < -minSpeed)
+            if (transform.position.x < 3 && transform.position.x > -1.5 && rb.linearVelocityX < -minSpeed) // slows down when near the box
             {
                 rb.linearVelocityX += slowRate;
             }
-            else if (rb.linearVelocityX > -speed)
+            else if (rb.linearVelocityX > -speed) // speeds back up when leaving the designated area
             {
                 rb.linearVelocityX -= slowRate;
             }

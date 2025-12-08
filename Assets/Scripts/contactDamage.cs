@@ -8,7 +8,7 @@ public class contactDamage : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) // damages the player on contact
     {
         if (collision.gameObject.tag == "Soul")
         {

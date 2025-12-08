@@ -18,7 +18,7 @@ public class bomb : MonoBehaviour
     }
     void Update()
     {
-        if (counting)
+        if (counting) // if the bomb gets shot, explode after a delay
         {
             timer += Time.deltaTime;
             if (timer >  explosionDelay)
@@ -33,7 +33,7 @@ public class bomb : MonoBehaviour
         if (collision.gameObject.tag == "bullet")
         {
             counting = true;
-            if (collision.GetComponent<bullet>().bigShot == false)
+            if (collision.GetComponent<bullet>().bigShot == false) // only destroys regular shots, allowing big shots to pierce
             {
                 Destroy(collision.gameObject);
             }

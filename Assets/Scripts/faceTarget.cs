@@ -9,7 +9,7 @@ public class faceTarget : MonoBehaviour
     }
     void Update()
     {
-        Vector2 direction = new Vector2(soul.transform.position.x - transform.position.x, soul.transform.position.y - transform.position.y);
+        Vector2 direction = new Vector2(soul.transform.position.x - transform.position.x, soul.transform.position.y - transform.position.y); // face toward the soul
         transform.up = direction;
     }
 }

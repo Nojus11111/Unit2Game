@@ -26,7 +26,7 @@ public class attackBar : MonoBehaviour
     }
     void Update()
     {
-        if (!canHit)
+        if (!canHit) // prevents player from accidentally attacking immediately
         {
             timer += Time.deltaTime;
         }
@@ -39,7 +39,7 @@ public class attackBar : MonoBehaviour
         {
             rb.linearVelocityX = -speed;
         }
-        if (Input.GetKey(KeyCode.Z) && damaging && canHit)
+        if (Input.GetKey(KeyCode.Z) && damaging && canHit) // hit
         {
             enemy.GetComponent<Boss>().TakeDamage(5);
             player.GetComponent<Player>().attacking = false;
@@ -48,7 +48,7 @@ public class attackBar : MonoBehaviour
             canHit = false;
             GameManager.GetComponent<GameManager>().playerTurn = false;
         }
-        if (Input.GetKey(KeyCode.Z) && !damaging && canHit)
+        if (Input.GetKey(KeyCode.Z) && !damaging && canHit) // miss
         {
             player.GetComponent<Player>().attacking = false;
             player.GetComponent<Player>().canAttack = true;
@@ -63,7 +63,7 @@ public class attackBar : MonoBehaviour
         {
             damaging = true;
         }
-        if (collision.gameObject.tag == "killZone")
+        if (collision.gameObject.tag == "killZone") // miss if the player doesn't press anything
         {
             player.GetComponent<Player>().attacking = false;
             player.GetComponent<Player>().canAttack = true;

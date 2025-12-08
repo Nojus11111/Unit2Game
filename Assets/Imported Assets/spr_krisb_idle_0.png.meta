@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7e0a6f0063f64474292629764c71c6b0
+guid: 3e5e0a5e9b3785445b37f96dd4287a69
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5854712753111198891
-    second: Kris_battle_idle-6_0
+      213: -927777217362818129
+    second: spr_krisb_idle_0_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 50
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -73,8 +73,8 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
+    resizeAlgorithm: 1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Kris_battle_idle-6_0
+      name: spr_krisb_idle_0_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 33
-        height: 49
+        width: 36
+        height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bac6427ba3e104150800000000000000
-      internalID: 5854712753111198891
+      spriteID: fab8360598fdf13f0800000000000000
+      internalID: -927777217362818129
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 1fe56dca5c236b246aa351ec92802e8f
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Kris_battle_idle-6_0: 5854712753111198891
+      spr_krisb_idle_0_0: -927777217362818129
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

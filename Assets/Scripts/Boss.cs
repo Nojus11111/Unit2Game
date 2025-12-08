@@ -21,6 +21,7 @@ public class Boss : MonoBehaviour
     private GameObject player;
     public GameObject wall;
     public GameObject bomb;
+    public GameObject soul;
     void Start()
     {
         GameManager = GameObject.FindWithTag("Manager");
@@ -30,6 +31,7 @@ public class Boss : MonoBehaviour
     }
     void Update()
     {
+        // disable damage number
         if (hit)
         {
             timer += Time.deltaTime;
@@ -40,6 +42,7 @@ public class Boss : MonoBehaviour
                 hit = false;
             }
         }
+        // attacks
         if (GameManager.GetComponent<GameManager>().playerTurn == false)
         {
             battleBox.SetActive(true);
@@ -56,8 +59,10 @@ public class Boss : MonoBehaviour
             }
             if (attackDuration < 0)
             {
+                // end enemy turn
                 GameManager.GetComponent<GameManager>().playerTurn = true;
                 attackDuration = 10;
+                soul.transform.position = battleBox.transform.position; // puts soul back in the middle of the battlebox
                 battleBox.SetActive(false);
                 attackStarted = false;
                 player.GetComponent<Player>().blocking = false;
@@ -74,7 +79,7 @@ public class Boss : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        damageNumber.SetActive(true);
+        damageNumber.SetActive(true); // display damage number
         damageNumber.GetComponent<TextMesh>().text = damage.ToString();
         hit = true;
     }
@@ -83,28 +88,28 @@ public class Boss : MonoBehaviour
         while (GameManager.GetComponent<GameManager>().playerTurn == false)
         {
             float randomNumber = Random.Range(-2.1f, 2.1f);
-            for (int i = 0; i < 4;)
+            for (int i = 0; i < 4;) // spawns spamton heads in groups of 4
             {
-                position = new Vector3(spawnPos.position.x, spawnPos.position.y + randomNumber, spawnPos.position.z);
+                position = new Vector3(spawnPos.position.x, spawnPos.position.y + randomNumber, spawnPos.position.z); // randomise Y coordinate for the spawn location
                 Instantiate(spamHead, position, gameObject.transform.rotation);
-                yield return new WaitForSeconds(spawnGap);
+                yield return new WaitForSeconds(spawnGap); // the gap between each spamton head
                 i++;
             }
-            yield return new WaitForSeconds(spawnDelay);
+            yield return new WaitForSeconds(spawnDelay); // the gap between each wave of spamton heads
         }
     }
     IEnumerator Attack2()
     {
         for (int x = 0;x < 2;)
         {
-            for (int i = 0; i < 3;)
+            for (int i = 0; i < 3;) // creates 3 walls of mail with 2 gaps in each wall, one with a spamton head, one with a bomb
             {
-                position = new Vector3(spawnPos.position.x, 1.59f, spawnPos.position.z);
+                position = new Vector3(spawnPos.position.x, 1.59f, spawnPos.position.z); 
                 Instantiate(wall, position, transform.rotation);
                 position.y -= 0.79f;
                 Instantiate(wall, position, transform.rotation);
                 position.y -= 0.79f;
-                if (i == 1)
+                if (i == 1) // alternates the spawn locations of the bomb and spamton head
                 {
                     Instantiate(bomb, position, transform.rotation);
                 }
@@ -115,7 +120,7 @@ public class Boss : MonoBehaviour
                 position.y -= 0.79f;
                 Instantiate(wall, position, transform.rotation);
                 position.y -= 0.79f;
-                if (i == 1)
+                if (i == 1) // alternates the spawn locations of the spamton head and bomb
                 {
                     Instantiate(spamHead, position, transform.rotation);
                 }
@@ -127,11 +132,11 @@ public class Boss : MonoBehaviour
                 Instantiate(wall, position, transform.rotation);
                 position.y -= 0.79f;
                 Instantiate(wall, position, transform.rotation);
-                yield return new WaitForSeconds(spawnDelay - 0.5f);
+                yield return new WaitForSeconds(spawnDelay - 0.5f); // the gap between each wall
                 i++;
             }
-            yield return new WaitForSeconds(0.25f);
-            for (int i = 0; i < 4;)
+            yield return new WaitForSeconds(0.25f); // wait a little before spawning the quad walls
+            for (int i = 0; i < 4;) // spawns 4 compact walls with a big gap filled with spamton heads near the bottom
             {
                 position = new Vector3(spawnPos.position.x, 1.59f, spawnPos.position.z);
                 Instantiate(wall, position, transform.rotation);
@@ -148,7 +153,7 @@ public class Boss : MonoBehaviour
                 position.y -= 0.79f;
                 Instantiate(wall, position, transform.rotation);
                 position.y -= 0.79f;
-                yield return new WaitForSeconds(0.15f);
+                yield return new WaitForSeconds(0.15f); // gap between each wall
                 i++;
             }
             x++;

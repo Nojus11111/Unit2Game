@@ -16,7 +16,7 @@ public class despawner : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (attack && gameManager.GetComponent<GameManager>().playerTurn)
+        if (attack && gameManager.GetComponent<GameManager>().playerTurn) // deletes projectiles at the end of the attack
         {
             Destroy(gameObject);
         }

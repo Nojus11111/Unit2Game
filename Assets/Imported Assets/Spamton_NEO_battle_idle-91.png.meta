@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d0992c81071344e43b06e513d9395a15
+guid: 521343b4863669a449d589544f51a7b3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2343376236090160100
-    second: Kris_battle_idle-1_0
+      213: 5803544419341320998
+    second: Spamton_NEO_battle_idle-91_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Kris_battle_idle-1_0
+      name: Spamton_NEO_battle_idle-91_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 71
-        height: 75
+        width: 161
+        height: 245
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4e3fe3f5548558020800000000000000
-      internalID: 2343376236090160100
+      spriteID: 6234a01a6e45a8050800000000000000
+      internalID: 5803544419341320998
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Kris_battle_idle-1_0: 2343376236090160100
+      Spamton_NEO_battle_idle-91_0: 5803544419341320998
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
