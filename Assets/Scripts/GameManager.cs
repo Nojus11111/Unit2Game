@@ -6,6 +6,6 @@ public class GameManager : MonoBehaviour
     public int turn;
     private void Start()
     {
-        turn = 1;
+
     }
 }
