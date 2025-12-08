@@ -12,11 +12,32 @@ public class spamtonHead : MonoBehaviour
     public float slowRate;
     private GameObject Player;
     public int damage;
+    public float speed2;
+    public bool useSpeed2;
+    private GameObject gameManager;
     void Start()
     {
+        gameManager = GameObject.FindWithTag("Manager");
         rb = GetComponent<Rigidbody2D>();
-        rb.linearVelocityX = -speed;
-        Player = GameObject.FindWithTag("Player");
+        if (gameManager.GetComponent<GameManager>().turn == 2)
+        {
+            useSpeed2 = true;
+            GetComponent<despawner>().lifetime = 3;
+            shootDelay += 0.35f;
+        }
+        else
+        {
+            useSpeed2 = false;
+        }
+        if (!useSpeed2)
+        {
+            rb.linearVelocityX = -speed;
+        }
+        else
+        {
+            rb.linearVelocityX = -speed2;
+        }
+            Player = GameObject.FindWithTag("Player");
     }
     void Update()
     {
@@ -26,13 +47,16 @@ public class spamtonHead : MonoBehaviour
             Instantiate(bullet, shootPos.position, shootPos.rotation);
             timer = 0;
         }
-        if (transform.position.x < 3 &&  transform.position.x > -1.5 && rb.linearVelocityX < -minSpeed)
+        if (!useSpeed2)
         {
-            rb.linearVelocityX += slowRate;
-        }
-        else if(rb.linearVelocityX > -speed)
-        {
-            rb.linearVelocityX -= slowRate;
+            if (transform.position.x < 3 && transform.position.x > -1.5 && rb.linearVelocityX < -minSpeed)
+            {
+                rb.linearVelocityX += slowRate;
+            }
+            else if (rb.linearVelocityX > -speed)
+            {
+                rb.linearVelocityX -= slowRate;
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

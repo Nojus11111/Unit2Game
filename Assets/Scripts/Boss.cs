@@ -19,6 +19,8 @@ public class Boss : MonoBehaviour
     private Vector3 position;
     private bool attackStarted;
     private GameObject player;
+    public GameObject wall;
+    public GameObject bomb;
     void Start()
     {
         GameManager = GameObject.FindWithTag("Manager");
@@ -38,25 +40,35 @@ public class Boss : MonoBehaviour
                 hit = false;
             }
         }
-        if (GameManager.GetComponent<GameManager>().playerTurn == false && GameManager.GetComponent<GameManager>().turn == 1)
+        if (GameManager.GetComponent<GameManager>().playerTurn == false)
         {
             battleBox.SetActive(true);
             attackDuration -= Time.deltaTime;
-            if (!attackStarted)
+            if (!attackStarted && GameManager.GetComponent<GameManager>().turn == 1)
             {
-                StartCoroutine(Spawning());
+                StartCoroutine(Attack1());
+                attackStarted = true;
+            }
+            if (!attackStarted && GameManager.GetComponent<GameManager>().turn == 2)
+            {
+                StartCoroutine(Attack2());
                 attackStarted = true;
             }
             if (attackDuration < 0)
             {
                 GameManager.GetComponent<GameManager>().playerTurn = true;
-                attackDuration = 8;
+                attackDuration = 10;
                 battleBox.SetActive(false);
                 attackStarted = false;
                 player.GetComponent<Player>().blocking = false;
                 player.GetComponent<Player>().actionDelay = 0;
                 player.GetComponent<Player>().actionUI.SetActive(true);
+                GameManager.GetComponent<GameManager>().turn += 1;
             }
+        }
+        if (GameManager.GetComponent<GameManager>().playerTurn == true)
+        {
+            StopAllCoroutines();
         }
     }
     public void TakeDamage(int damage)
@@ -66,7 +78,7 @@ public class Boss : MonoBehaviour
         damageNumber.GetComponent<TextMesh>().text = damage.ToString();
         hit = true;
     }
-    IEnumerator Spawning()
+    IEnumerator Attack1()
     {
         while (GameManager.GetComponent<GameManager>().playerTurn == false)
         {
@@ -79,6 +91,68 @@ public class Boss : MonoBehaviour
                 i++;
             }
             yield return new WaitForSeconds(spawnDelay);
+        }
+    }
+    IEnumerator Attack2()
+    {
+        for (int x = 0;x < 2;)
+        {
+            for (int i = 0; i < 3;)
+            {
+                position = new Vector3(spawnPos.position.x, 1.59f, spawnPos.position.z);
+                Instantiate(wall, position, transform.rotation);
+                position.y -= 0.79f;
+                Instantiate(wall, position, transform.rotation);
+                position.y -= 0.79f;
+                if (i == 1)
+                {
+                    Instantiate(bomb, position, transform.rotation);
+                }
+                else
+                {
+                    Instantiate(spamHead, position, transform.rotation);
+                }
+                position.y -= 0.79f;
+                Instantiate(wall, position, transform.rotation);
+                position.y -= 0.79f;
+                if (i == 1)
+                {
+                    Instantiate(spamHead, position, transform.rotation);
+                }
+                else
+                {
+                    Instantiate(bomb, position, transform.rotation);
+                }
+                position.y -= 0.79f;
+                Instantiate(wall, position, transform.rotation);
+                position.y -= 0.79f;
+                Instantiate(wall, position, transform.rotation);
+                yield return new WaitForSeconds(spawnDelay - 0.5f);
+                i++;
+            }
+            yield return new WaitForSeconds(0.25f);
+            for (int i = 0; i < 4;)
+            {
+                position = new Vector3(spawnPos.position.x, 1.59f, spawnPos.position.z);
+                Instantiate(wall, position, transform.rotation);
+                position.y -= 0.79f;
+                Instantiate(wall, position, transform.rotation);
+                position.y -= 0.79f;
+                Instantiate(wall, position, transform.rotation);
+                position.y -= 0.79f;
+                Instantiate(wall, position, transform.rotation);
+                position.y -= 0.79f;
+                Instantiate(spamHead, position, transform.rotation);
+                position.y -= 0.79f;
+                Instantiate(spamHead, position, transform.rotation);
+                position.y -= 0.79f;
+                Instantiate(wall, position, transform.rotation);
+                position.y -= 0.79f;
+                yield return new WaitForSeconds(0.15f);
+                i++;
+            }
+            x++;
+            yield return new WaitForSeconds(spawnDelay - 0.5f);
         }
     }
 }
