@@ -80,7 +80,14 @@ public class Boss : MonoBehaviour
     {
         health -= damage;
         damageNumber.SetActive(true); // display damage number
-        damageNumber.GetComponent<TextMesh>().text = damage.ToString();
+        if (damage == 0)
+        {
+            damageNumber.GetComponent<TextMesh>().text = "MISS";
+        }
+        else
+        {
+            damageNumber.GetComponent<TextMesh>().text = damage.ToString();
+        }
         hit = true;
     }
     IEnumerator Attack1()

@@ -9,6 +9,7 @@ TagManager:
   - killZone
   - Soul
   - bullet
+  - strong attack
   layers:
   - Default
   - TransparentFX
