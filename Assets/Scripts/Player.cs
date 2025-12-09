@@ -22,12 +22,14 @@ public class Player : MonoBehaviour
     public GameObject actionUI;
     public GameObject healthDisplay;
     private int maxHealth;
+    private Animator animator;
     void Start()
     {
         GameManager = GameObject.FindWithTag("Manager");
         invincible = false;
         enemy = GameObject.FindWithTag("Enemy");
         maxHealth = health;
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -91,6 +93,7 @@ public class Player : MonoBehaviour
                 case 1: // FIGHT
                     if (canAttack)
                     {
+                        animator.Play("Attack Ready");
                         attacking = true;
                         AttackUI.SetActive(true);
                         canAttack = false;
@@ -112,6 +115,7 @@ public class Player : MonoBehaviour
                     actionUI.SetActive(false);
                 break;
                 case 4: // DEFEND
+                    animator.Play("Defend");
                     blocking = true;
                     TP += 16;
                     GameManager.GetComponent<GameManager>().playerTurn = false;

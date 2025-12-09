@@ -45,6 +45,7 @@ public class attackBar : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Z) && canHit) // hit
         {
+            player.GetComponent<Animator>().Play("Slash");
             enemy.GetComponent<Boss>().TakeDamage(damage);
             player.GetComponent<Player>().attacking = false;
             player.GetComponent<Player>().canAttack = true;
@@ -66,6 +67,7 @@ public class attackBar : MonoBehaviour
         }
         if (collision.gameObject.tag == "killZone") // miss if the player doesn't press anything
         {
+            player.GetComponent<Animator>().Play("Slash");
             player.GetComponent<Player>().attacking = false;
             player.GetComponent<Player>().canAttack = true;
             transform.position = startPoint.position;

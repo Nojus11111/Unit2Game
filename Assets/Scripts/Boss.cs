@@ -15,25 +15,46 @@ public class Boss : MonoBehaviour
     public Transform spawnPos;
     public float spawnDelay;
     public float spawnGap;
-    private float spawnTimer;
     private Vector3 position;
     private bool attackStarted;
     private GameObject player;
     public GameObject wall;
     public GameObject bomb;
     public GameObject soul;
+    public float attackDelay;
+    [HideInInspector] public float delayTimer;
+    private Animator animator;
+    public float shakeSpeed;
+    public Transform minShake;
+    public Transform maxShake;
+    private Transform target;
     void Start()
     {
         GameManager = GameObject.FindWithTag("Manager");
         attackDuration = 8;
         attackStarted = false;
         player = GameObject.FindWithTag("Player");
+        animator = GetComponent<Animator>();
+        target = maxShake;
     }
     void Update()
     {
         // disable damage number
         if (hit)
         {
+            if (timer < damageDisplayTime / 2) // makes the boss shake when hit
+            {
+                transform.position = Vector2.MoveTowards(this.transform.position, target.position, shakeSpeed * Time.deltaTime);
+                if (transform.position == maxShake.position)
+                {
+                    target = minShake;
+                }
+                if (transform.position == minShake.position)
+                {
+                    target = maxShake;
+                }
+            }
+            animator.Play("Pause");
             timer += Time.deltaTime;
             if (timer > damageDisplayTime)
             {
@@ -42,9 +63,22 @@ public class Boss : MonoBehaviour
                 hit = false;
             }
         }
+        else
+        {
+            animator.Play("Idle");
+        }
         // attacks
         if (GameManager.GetComponent<GameManager>().playerTurn == false)
         {
+            delayTimer += Time.deltaTime;
+            if (delayTimer < attackDelay)
+            {
+                return;
+            }
+            if (player.GetComponent<Player>().blocking == false)
+            {
+                player.GetComponent<Animator>().Play("Idle");
+            }
             battleBox.SetActive(true);
             attackDuration -= Time.deltaTime;
             if (!attackStarted && GameManager.GetComponent<GameManager>().turn == 1)
@@ -69,6 +103,8 @@ public class Boss : MonoBehaviour
                 player.GetComponent<Player>().actionDelay = 0;
                 player.GetComponent<Player>().actionUI.SetActive(true);
                 GameManager.GetComponent<GameManager>().turn += 1;
+                delayTimer = 0;
+                player.GetComponent<Animator>().Play("Idle");
             }
         }
         if (GameManager.GetComponent<GameManager>().playerTurn == true)
