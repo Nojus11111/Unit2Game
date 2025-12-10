@@ -28,6 +28,7 @@ public class Boss : MonoBehaviour
     public Transform minShake;
     public Transform maxShake;
     private Transform target;
+    public GameObject faceAttack;
     void Start()
     {
         GameManager = GameObject.FindWithTag("Manager");
@@ -90,12 +91,18 @@ public class Boss : MonoBehaviour
             {
                 StartCoroutine(Attack2());
                 attackStarted = true;
+                attackDuration = 10;
+            }
+            if (!attackStarted && GameManager.GetComponent<GameManager>().turn == 3)
+            {
+                faceAttack.SetActive(true);
+                attackStarted = true;
+                attackDuration = 8;
             }
             if (attackDuration < 0)
             {
                 // end enemy turn
                 GameManager.GetComponent<GameManager>().playerTurn = true;
-                attackDuration = 10;
                 soul.transform.position = battleBox.transform.position; // puts soul back in the middle of the battlebox
                 battleBox.SetActive(false);
                 attackStarted = false;
@@ -105,6 +112,7 @@ public class Boss : MonoBehaviour
                 GameManager.GetComponent<GameManager>().turn += 1;
                 delayTimer = 0;
                 player.GetComponent<Animator>().Play("Idle");
+                faceAttack.SetActive(false);
             }
         }
         if (GameManager.GetComponent<GameManager>().playerTurn == true)
