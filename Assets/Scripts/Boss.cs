@@ -29,6 +29,7 @@ public class Boss : MonoBehaviour
     public Transform maxShake;
     private Transform target;
     public GameObject faceAttack;
+    public GameObject pipisCannon;
     void Start()
     {
         GameManager = GameObject.FindWithTag("Manager");
@@ -99,6 +100,12 @@ public class Boss : MonoBehaviour
                 attackStarted = true;
                 attackDuration = 8;
             }
+            if (!attackStarted && GameManager.GetComponent<GameManager>().turn == 4)
+            {
+                pipisCannon.SetActive(true);
+                attackStarted = true;
+                attackDuration = 16;
+            }
             if (attackDuration < 0)
             {
                 // end enemy turn
@@ -113,6 +120,7 @@ public class Boss : MonoBehaviour
                 delayTimer = 0;
                 player.GetComponent<Animator>().Play("Idle");
                 faceAttack.SetActive(false);
+                pipisCannon.SetActive(false);
             }
         }
         if (GameManager.GetComponent<GameManager>().playerTurn == true)

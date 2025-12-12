@@ -7,11 +7,16 @@ public class spamBullet : MonoBehaviour
     public float speed;
     public int damage;
     public float rotateSpeed;
+    public bool staticRotation;
     void Start()
     {
         Player = GameObject.FindWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
         rb.linearVelocity = transform.up * speed;
+        if (staticRotation)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
     }
     private void Update()
     {
