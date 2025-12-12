@@ -14,9 +14,10 @@ public class spamtonMouth : MonoBehaviour
     public float minRotation;
     public float maxRotation;
     private float rotation;
+    private Animator animator;
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -30,13 +31,15 @@ public class spamtonMouth : MonoBehaviour
     }
     IEnumerator shootWisps()
     {
-        for (int i = 0; i < wispCount;)
+        for (int i = 0; i < wispCount;) // shoots wisps at in random direction
         {
+            animator.Play("Blow");
             rotation = UnityEngine.Random.Range(minRotation, maxRotation);
             shootPos.rotation = Quaternion.Euler(0, 0, rotation);
             Instantiate(wisp, shootPos.position, shootPos.rotation);
             yield return new WaitForSeconds(shootGap);
             i++;
         }
+        animator.Play("default");
     }
 }

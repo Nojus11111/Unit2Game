@@ -27,7 +27,7 @@ public class spamtonNose : MonoBehaviour
     }
     IEnumerator shootNose()
     {
-        for (int i = 0; i < 3;)
+        for (int i = 0; i < 3;) // noseUp and noseDown are the same but they get a force applied up/down on them
         {
             Instantiate(nose, shootPos.position, shootPos.rotation);
             Instantiate(noseUp, shootPos.position, shootPos.rotation);

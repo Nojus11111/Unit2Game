@@ -21,12 +21,13 @@ public class spamCannon : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+        // rotates the cannon over time to randomRotation
         float currentRotation = rotatePoint.eulerAngles.z;
         float newRotation = Mathf.MoveTowardsAngle(currentRotation, randomRotation, rotateSpeed * Time.deltaTime);
         rotatePoint.rotation = Quaternion.Euler(0f, 0f, newRotation);
         if (timer > shootDelay)
         {
-            doubleShot = Random.Range(0, doubleShotChance);
+            doubleShot = Random.Range(0, doubleShotChance); // has a chance to shoot 2 projectiles 
             if (doubleShot == 0)
             {
                 Instantiate(pipis, shootPos.position, shootPos.rotation);

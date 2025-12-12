@@ -13,7 +13,7 @@ public class spamtonHead : MonoBehaviour
     private GameObject Player;
     public int damage;
     public float speed2;
-    public bool useSpeed2;
+    [HideInInspector] public bool useSpeed2;
     private GameObject gameManager;
     private Animator animator;
     void Start()

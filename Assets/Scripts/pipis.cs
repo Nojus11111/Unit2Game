@@ -15,11 +15,13 @@ public class pipis : MonoBehaviour
     public float maxSpread;
     private float spread;
     private Quaternion ogRotation;
+    private Animator animator;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         force = Random.Range(minForce, maxForce);
         rb.linearVelocity = transform.up * force;
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -30,7 +32,7 @@ public class pipis : MonoBehaviour
         if (collision.gameObject.layer == 6)
         {
             ogRotation = shootPos.rotation;
-            for (int i = 0; i < miniSpamCount;)
+            for (int i = 0; i < miniSpamCount;) // shoots mini spamtons in a cone
             {
                 spread = Random.Range(minSpread, maxSpread);
                 shootPos.rotation = shootPos.rotation * Quaternion.Euler(0, 0, spread);
@@ -53,6 +55,19 @@ public class pipis : MonoBehaviour
             {
                 Destroy(collision.gameObject);
                 hp -= 1;
+                switch (hp)
+                {
+                    case 1:
+                        animator.Play("Damage3");
+                    break;
+                    case 2:
+                        animator.Play("Damage2");
+                    break;
+                    case 3:
+                        animator.Play("Damage1");
+                    break;
+                }
+                animator.speed = 0f;
                 if (hp <= 0)
                 {
                     Destroy(gameObject);

@@ -8,7 +8,6 @@ public class bullet : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
         rb.linearVelocity = transform.right * speed;
     }
 }

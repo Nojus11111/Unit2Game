@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 5207957706825983916}
   - component: {fileID: 6017994880376574238}
   - component: {fileID: 5138249185371945607}
+  - component: {fileID: 4281310675740094967}
   m_Layer: 7
   m_Name: pipis
   m_TagString: Untagged
@@ -274,3 +275,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifetime: 16
   attack: 1
+--- !u!95 &4281310675740094967
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4798948142333544065}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bb937306817a17c408774ee6e7a4db41, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

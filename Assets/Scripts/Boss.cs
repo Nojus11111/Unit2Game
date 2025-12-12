@@ -83,24 +83,24 @@ public class Boss : MonoBehaviour
             }
             battleBox.SetActive(true);
             attackDuration -= Time.deltaTime;
-            if (!attackStarted && GameManager.GetComponent<GameManager>().turn == 1)
+            if (!attackStarted && GameManager.GetComponent<GameManager>().turn == 1) // row attack
             {
                 StartCoroutine(Attack1());
                 attackStarted = true;
             }
-            if (!attackStarted && GameManager.GetComponent<GameManager>().turn == 2)
+            if (!attackStarted && GameManager.GetComponent<GameManager>().turn == 2) // wall attack
             {
                 StartCoroutine(Attack2());
                 attackStarted = true;
                 attackDuration = 10;
             }
-            if (!attackStarted && GameManager.GetComponent<GameManager>().turn == 3)
+            if (!attackStarted && GameManager.GetComponent<GameManager>().turn == 3) // face attack
             {
                 faceAttack.SetActive(true);
                 attackStarted = true;
                 attackDuration = 8;
             }
-            if (!attackStarted && GameManager.GetComponent<GameManager>().turn == 4)
+            if (!attackStarted && GameManager.GetComponent<GameManager>().turn == 4) // pipis attack
             {
                 pipisCannon.SetActive(true);
                 attackStarted = true;

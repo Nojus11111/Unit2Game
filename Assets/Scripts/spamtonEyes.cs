@@ -18,7 +18,7 @@ public class spamtonEyes : MonoBehaviour
     }
     void Update()
     {
-        if (targeting)
+        if (targeting) // has a transform that follows the soul, the eyes start shooting the transform stays still so that the laser travels in a straight line
         {
             target.position = soul.transform.position;
         }
