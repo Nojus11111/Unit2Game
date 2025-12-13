@@ -28,9 +28,14 @@ public class finalForme : MonoBehaviour
     public Transform start;
     public float finalShotDelay;
     private float finalTimer;
+    private Animator animator;
+    public float openDuration;
+    private float mouthTimer;
+    private bool mouthOpen = true;
     void Start()
     {
         targetPos = upPoint;
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -59,15 +64,29 @@ public class finalForme : MonoBehaviour
             {
                 targetPos = downPoint;
                 Instantiate(bigShot, shootPos.position, shootPos.rotation);
+                mouthOpen = true;
             }
             if (transform.position == downPoint.position)
             {
                 targetPos = upPoint;
                 Instantiate(bigShot, shootPos.position, shootPos.rotation);
+                mouthOpen = true;
+            }
+            if (mouthOpen)
+            {
+                animator.Play("Mouth open");
+                mouthTimer += Time.deltaTime;
+                if (mouthTimer > openDuration)
+                {
+                    mouthTimer = 0;
+                    mouthOpen = false;
+                    animator.Play("Mouth closed");
+                }
             }
             if (timer2 > part2Duration)
             {
                 part3 = true;
+                animator.Play("Mouth closed");
             }
         }
         if (part3 && !part1) // shoots one final huge shot
@@ -78,6 +97,7 @@ public class finalForme : MonoBehaviour
                 finalTimer += Time.deltaTime;
                 if (finalTimer > finalShotDelay)
                 {
+                    animator.Play("Mouth open");
                     Instantiate(superBigShot, shootPos.position, shootPos.rotation);
                     part1 = true;
                 }

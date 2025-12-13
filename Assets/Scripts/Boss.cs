@@ -32,6 +32,7 @@ public class Boss : MonoBehaviour
     public GameObject pipisCannon;
     public GameObject finalForme;
     [HideInInspector] public bool finalAttack;
+    public GameObject slash;
     void Start()
     {
         GameManager = GameObject.FindWithTag("Manager");
@@ -45,7 +46,7 @@ public class Boss : MonoBehaviour
         // disable damage number
         if (hit)
         {
-            if (timer < damageDisplayTime / 2) // makes the boss shake when hit
+            if (timer < damageDisplayTime / 2 && damageNumber.GetComponent<TextMesh>().text != "MISS") // makes the boss shake when hit
             {
                 transform.position = Vector2.MoveTowards(this.transform.position, target.position, shakeSpeed * Time.deltaTime);
                 if (transform.position == maxShake.position)
@@ -149,6 +150,7 @@ public class Boss : MonoBehaviour
         else
         {
             damageNumber.GetComponent<TextMesh>().text = damage.ToString();
+            slash.GetComponent<Animator>().Play("Slash");
         }
         hit = true;
     }

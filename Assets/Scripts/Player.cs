@@ -24,6 +24,11 @@ public class Player : MonoBehaviour
     private int maxHealth;
     private Animator animator;
     public int actDamage;
+    public GameObject damageNumber;
+    private bool hit;
+    public float damageDisplayTime;
+    private float damageTimer;
+    public GameObject tpDisplay;
     void Start()
     {
         GameManager = GameObject.FindWithTag("Manager");
@@ -34,6 +39,16 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+        if (hit)
+        {
+            damageTimer += Time.deltaTime;
+            if (damageTimer > damageDisplayTime)
+            {
+                damageNumber.SetActive(false);
+                damageTimer = 0;
+                hit = false;
+            }
+        }
         actionDelay += Time.deltaTime;
         if (actionDelay < 0.5) // prevents the player from accidentally picking an option immediately as the turn starts by adding a delay before they can pick anything
         {
@@ -42,6 +57,7 @@ public class Player : MonoBehaviour
         if (GameManager.GetComponent<GameManager>().playerTurn == true)
         {
             healthDisplay.GetComponent<TextMesh>().text = health.ToString() + "/" + maxHealth.ToString(); // display health
+            tpDisplay.GetComponent<TextMesh>().text = TP.ToString() + "/100"; // display TP
             if (selected < 1)
             {
                 selected = 1;
@@ -152,7 +168,9 @@ public class Player : MonoBehaviour
                 damage = damage / 2;
             }
             health -= damage;
-            Debug.Log(damage);
+            damageNumber.SetActive(true);
+            damageNumber.GetComponent<TextMesh>().text = damage.ToString();
+            hit = true;
             invincible = true;
         }
     }
