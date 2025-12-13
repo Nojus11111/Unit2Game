@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public bool attacking;
+    [HideInInspector] public bool attacking;
     private GameObject GameManager;
     public GameObject AttackUI;
     public bool canAttack = true;
@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     private float timer;
     private bool invincible;
     private int selected;
-    public bool blocking;
+    [HideInInspector] public bool blocking;
     [HideInInspector] public float actionDelay;
     public int TP;
     private GameObject enemy;
@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public GameObject healthDisplay;
     private int maxHealth;
     private Animator animator;
+    public int actDamage;
     void Start()
     {
         GameManager = GameObject.FindWithTag("Manager");
@@ -103,8 +104,9 @@ public class Player : MonoBehaviour
                 case 2: // ACT
                     if (TP >= 30)
                     {
+                        animator.Play("Slash");
                         TP -= 30;
-                        enemy.GetComponent<Boss>().TakeDamage(20);
+                        enemy.GetComponent<Boss>().TakeDamage(actDamage);
                         GameManager.GetComponent<GameManager>().playerTurn = false;
                         actionUI.SetActive(false);
                     }

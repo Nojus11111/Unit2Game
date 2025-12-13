@@ -30,10 +30,11 @@ public class Boss : MonoBehaviour
     private Transform target;
     public GameObject faceAttack;
     public GameObject pipisCannon;
+    public GameObject finalForme;
+    [HideInInspector] public bool finalAttack;
     void Start()
     {
         GameManager = GameObject.FindWithTag("Manager");
-        attackDuration = 8;
         attackStarted = false;
         player = GameObject.FindWithTag("Player");
         animator = GetComponent<Animator>();
@@ -83,10 +84,18 @@ public class Boss : MonoBehaviour
             }
             battleBox.SetActive(true);
             attackDuration -= Time.deltaTime;
+            if (!attackStarted && GameManager.GetComponent<GameManager>().turn == 0) // final forme attack
+            {
+                finalForme.SetActive(true);
+                attackStarted = true;
+                attackDuration = 20;
+                finalAttack = true;
+            }
             if (!attackStarted && GameManager.GetComponent<GameManager>().turn == 1) // row attack
             {
                 StartCoroutine(Attack1());
                 attackStarted = true;
+                attackDuration = 8;
             }
             if (!attackStarted && GameManager.GetComponent<GameManager>().turn == 2) // wall attack
             {
@@ -121,6 +130,7 @@ public class Boss : MonoBehaviour
                 player.GetComponent<Animator>().Play("Idle");
                 faceAttack.SetActive(false);
                 pipisCannon.SetActive(false);
+                finalForme.SetActive(false);
             }
         }
         if (GameManager.GetComponent<GameManager>().playerTurn == true)

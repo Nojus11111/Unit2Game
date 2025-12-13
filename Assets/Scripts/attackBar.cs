@@ -47,6 +47,7 @@ public class attackBar : MonoBehaviour
         {
             player.GetComponent<Animator>().Play("Slash");
             enemy.GetComponent<Boss>().TakeDamage(damage);
+            player.GetComponent<Player>().TP += damage/8;
             player.GetComponent<Player>().attacking = false;
             player.GetComponent<Player>().canAttack = true;
             transform.position = startPoint.position;

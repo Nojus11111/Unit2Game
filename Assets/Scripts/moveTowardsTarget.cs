@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class moveTowardsTarget : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public Transform target;
+    public float speed;
+    public bool finalAttack;
     void Start()
     {
-        
+        if (finalAttack)
+        {
+            target = GameObject.FindWithTag("Kromer").GetComponent<Transform>();
+        }
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        transform.position = Vector2.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
+        if (finalAttack && transform.position == target.position)
+        {
+            Destroy(gameObject);
+        }
     }
 }

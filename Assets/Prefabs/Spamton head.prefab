@@ -157,7 +157,7 @@ MonoBehaviour:
   shootPos: {fileID: 2621672550332278854}
   minSpeed: 5
   slowRate: 0.075
-  damage: 5
+  damage: 15
   speed2: 8
   useSpeed2: 0
 --- !u!50 &8164407325972017229
