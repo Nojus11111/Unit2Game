@@ -47,6 +47,7 @@ public class pipis : MonoBehaviour
     {
         if (collision.gameObject.tag == "bullet")
         {
+            GameObject.FindWithTag("pipis cannon").GetComponent<spamCannon>().playSound();
             if (collision.gameObject.GetComponent<bullet>().bigShot == true)
             {
                 Destroy(gameObject);

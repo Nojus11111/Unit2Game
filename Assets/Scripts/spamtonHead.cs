@@ -16,6 +16,7 @@ public class spamtonHead : MonoBehaviour
     [HideInInspector] public bool useSpeed2;
     private GameObject gameManager;
     private Animator animator;
+    public AudioClip deathSound;
     void Start()
     {
         gameManager = GameObject.FindWithTag("Manager");
@@ -71,6 +72,7 @@ public class spamtonHead : MonoBehaviour
     {
         if (collision.gameObject.tag == "bullet")
         {
+            GameObject.FindWithTag("Enemy").GetComponent<Boss>().playSound(deathSound);
             Destroy(gameObject);
             if (collision.GetComponent<bullet>().bigShot == false)
             {

@@ -160,6 +160,7 @@ MonoBehaviour:
   damage: 15
   speed2: 8
   useSpeed2: 0
+  deathSound: {fileID: 8300000, guid: bc158a6a74b2a9e4fb0d23a5cf3da227, type: 3}
 --- !u!50 &8164407325972017229
 Rigidbody2D:
   serializedVersion: 5

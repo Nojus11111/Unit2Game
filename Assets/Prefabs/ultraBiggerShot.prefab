@@ -105,6 +105,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.15
+  isWall: 0
+  soundPlayer: {fileID: 0}
+  ding: {fileID: 0}
 --- !u!50 &6648069040305072996
 Rigidbody2D:
   serializedVersion: 5
@@ -144,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091483d419f7dba45bbdfb6fb2e9db2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 10
+  lifetime: 15
   attack: 1
 --- !u!95 &5026547871448927218
 Animator:

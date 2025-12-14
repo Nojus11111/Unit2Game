@@ -33,6 +33,8 @@ public class Boss : MonoBehaviour
     public GameObject finalForme;
     [HideInInspector] public bool finalAttack;
     public GameObject slash;
+    public AudioSource soundPlayer;
+    public AudioClip damageSound;
     void Start()
     {
         GameManager = GameObject.FindWithTag("Manager");
@@ -132,6 +134,8 @@ public class Boss : MonoBehaviour
                 faceAttack.SetActive(false);
                 pipisCannon.SetActive(false);
                 finalForme.SetActive(false);
+                finalAttack = false;
+
             }
         }
         if (GameManager.GetComponent<GameManager>().playerTurn == true)
@@ -149,10 +153,17 @@ public class Boss : MonoBehaviour
         }
         else
         {
+            soundPlayer.clip = damageSound;
+            soundPlayer.Play();
             damageNumber.GetComponent<TextMesh>().text = damage.ToString();
             slash.GetComponent<Animator>().Play("Slash");
         }
         hit = true;
+    }
+    public void playSound(AudioClip sound)
+    {
+        soundPlayer.clip = sound;
+        soundPlayer.Play();
     }
     IEnumerator Attack1()
     {

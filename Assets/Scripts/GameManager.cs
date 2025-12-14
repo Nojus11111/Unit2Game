@@ -10,9 +10,13 @@ public class GameManager : MonoBehaviour
     private GameObject NEO;
     private bool finalAttacked = false;
     public int finalAttackThreshold;
+    public AudioSource musicPlayer;
+    public AudioClip music;
     private void Start()
     {
         NEO = GameObject.FindWithTag("Enemy");
+        musicPlayer.clip = music;
+        musicPlayer.Play();
     }
     private void Update()
     {

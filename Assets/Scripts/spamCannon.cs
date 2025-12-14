@@ -16,11 +16,14 @@ public class spamCannon : MonoBehaviour
     private Animator animator;
     private bool firstShot;
     public GameObject firstPipis;
+    private AudioSource soundPlayer;
+    public AudioClip damageSound;
     void Start()
     {
         randomRotation = transform.rotation.z;
         timer = 1;
         animator = GetComponent<Animator>();
+        soundPlayer = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -53,5 +56,10 @@ public class spamCannon : MonoBehaviour
             timer = 0;
             animator.Play("default");
         }
+    }
+    public void playSound()
+    {
+        soundPlayer.clip = damageSound;
+        soundPlayer.Play();
     }
 }

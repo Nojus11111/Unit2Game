@@ -4,6 +4,9 @@ public class wall : MonoBehaviour
 {
     public float speed;
     private Rigidbody2D rb;
+    public bool isWall;
+    public AudioSource soundPlayer;
+    public AudioClip ding;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -14,6 +17,11 @@ public class wall : MonoBehaviour
         if (collision.gameObject.tag == "bullet")
         {
             Destroy(collision.gameObject);
+            if (isWall)
+            {
+                soundPlayer.clip = ding;
+                soundPlayer.Play();
+            }
         }
     }
 }

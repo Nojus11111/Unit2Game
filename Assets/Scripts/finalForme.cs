@@ -32,6 +32,10 @@ public class finalForme : MonoBehaviour
     public float openDuration;
     private float mouthTimer;
     private bool mouthOpen = true;
+    public AudioSource soundPlayer;
+    public AudioSource loopPlayer;
+    public AudioClip chargeSound;
+    public AudioClip shootSound;
     void Start()
     {
         targetPos = upPoint;
@@ -41,6 +45,11 @@ public class finalForme : MonoBehaviour
     {
         if (part1 && !part3) // spawns money signs at random heights that get sucked into spamton's mouth
         {
+            if (!loopPlayer.isPlaying)
+            {
+                loopPlayer.clip = chargeSound;
+                loopPlayer.Play();
+            }
             timer += Time.deltaTime;
             spawnTimer += Time.deltaTime;
             if (spawnTimer > spawnDelay)
@@ -58,16 +67,21 @@ public class finalForme : MonoBehaviour
         }
         if (!part1 && !part3) // shoots a bunch of big shots while moving up and down
         {
+            loopPlayer.Stop();
             timer2 += Time.deltaTime;
             transform.position = Vector2.MoveTowards(this.transform.position, targetPos.position, speed * Time.deltaTime);
             if (transform.position == upPoint.position)
             {
+                soundPlayer.clip = shootSound;
+                soundPlayer.Play();
                 targetPos = downPoint;
                 Instantiate(bigShot, shootPos.position, shootPos.rotation);
                 mouthOpen = true;
             }
             if (transform.position == downPoint.position)
             {
+                soundPlayer.clip = shootSound;
+                soundPlayer.Play();
                 targetPos = upPoint;
                 Instantiate(bigShot, shootPos.position, shootPos.rotation);
                 mouthOpen = true;
@@ -97,6 +111,8 @@ public class finalForme : MonoBehaviour
                 finalTimer += Time.deltaTime;
                 if (finalTimer > finalShotDelay)
                 {
+                    soundPlayer.clip = shootSound;
+                    soundPlayer.Play();
                     animator.Play("Mouth open");
                     Instantiate(superBigShot, shootPos.position, shootPos.rotation);
                     part1 = true;

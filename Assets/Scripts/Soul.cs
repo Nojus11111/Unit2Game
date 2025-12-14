@@ -13,9 +13,15 @@ public class Soul : MonoBehaviour
     public float shootDelay;
     private float shootTimer;
     public GameObject chargeIndicator;
+    public AudioSource soundPlayer;
+    public AudioSource loopPlayer;
+    public AudioClip shotSound;
+    public AudioClip bigShotSound;
+    public AudioClip chargeSound;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        loopPlayer.clip = chargeSound;
     }
     void Update()
     {
@@ -36,21 +42,40 @@ public class Soul : MonoBehaviour
             if (chargeTimer > chargeTime)
             {
                 chargeIndicator.SetActive(true);
+                if (!loopPlayer.isPlaying)
+                {
+                    loopPlayer.Play();
+                }
             }
         }
         if (Input.GetKeyUp(KeyCode.Z) && shootTimer > shootDelay) // release/shoot
         {
-            if (chargeTimer > chargeTime)
+            loopPlayer.Stop();
+            if (chargeTimer > chargeTime) // charge shot
             {
                 Instantiate(bigShot, transform.position, transform.rotation);
                 chargeIndicator.SetActive(false);
+                soundPlayer.clip = bigShotSound;
+                soundPlayer.Play();
             }
-            else
+            else // regular shot
             {
                 Instantiate(shot, transform.position, transform.rotation);
+                soundPlayer.clip = shotSound;
+                soundPlayer.Play();
             }
             chargeTimer = 0;
             shootTimer = 0;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision) // if the player was charging at the end of the previous attack, this will stop them from retaining that charge
+    {
+        if (collision.gameObject.tag == "white screen")
+        {
+            loopPlayer.Stop();
+            soundPlayer.Stop();
+            chargeTimer = 0;
+            chargeIndicator.SetActive(false);
         }
     }
 }

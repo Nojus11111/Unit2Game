@@ -28,7 +28,14 @@ public class Player : MonoBehaviour
     private bool hit;
     public float damageDisplayTime;
     private float damageTimer;
+    public int healAmount;
     public GameObject tpDisplay;
+    public AudioSource soundPlayer;
+    public AudioClip hurtSound;
+    public AudioClip healSound;
+    public AudioClip pickSound;
+    public AudioClip confirmSound;
+    public AudioClip strongSlashSound;
     void Start()
     {
         GameManager = GameObject.FindWithTag("Manager");
@@ -96,10 +103,14 @@ public class Player : MonoBehaviour
         }
         if (GameManager.GetComponent<GameManager>().playerTurn == true && Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            soundPlayer.clip = pickSound;
+            soundPlayer.Play();
             selected -= 1;
         }
         if (GameManager.GetComponent<GameManager>().playerTurn == true && Input.GetKeyDown(KeyCode.RightArrow))
         {
+            soundPlayer.clip = pickSound;
+            soundPlayer.Play();
             selected += 1;
         }
 
@@ -115,6 +126,8 @@ public class Player : MonoBehaviour
                         AttackUI.SetActive(true);
                         canAttack = false;
                         actionUI.SetActive(false);
+                        soundPlayer.clip = confirmSound;
+                        soundPlayer.Play();
                     }
                 break;
                 case 2: // ACT
@@ -125,19 +138,23 @@ public class Player : MonoBehaviour
                         enemy.GetComponent<Boss>().TakeDamage(actDamage);
                         GameManager.GetComponent<GameManager>().playerTurn = false;
                         actionUI.SetActive(false);
+                        soundPlayer.clip = strongSlashSound;
+                        soundPlayer.Play();
                     }
                 break;
                 case 3: // ITEM
-                    heal(20);
+                    heal(healAmount);
                     GameManager.GetComponent<GameManager>().playerTurn = false;
                     actionUI.SetActive(false);
-                break;
+                    break;
                 case 4: // DEFEND
                     animator.Play("Defend");
                     blocking = true;
                     TP += 16;
                     GameManager.GetComponent<GameManager>().playerTurn = false;
                     actionUI.SetActive(false);
+                    soundPlayer.clip = confirmSound;
+                    soundPlayer.Play();
                 break;
             }
         }
@@ -163,6 +180,8 @@ public class Player : MonoBehaviour
     {
         if (!invincible)
         {
+            soundPlayer.clip = hurtSound;
+            soundPlayer.Play();
             if (blocking) // reduce damage if blocking
             {
                 damage = damage / 2;
@@ -176,10 +195,17 @@ public class Player : MonoBehaviour
     }
     public void heal(int heal)
     {
+        soundPlayer.clip = healSound;
+        soundPlayer.Play();
         health += heal;
         if (health > maxHealth)
         {
             health = maxHealth;
         }
+    }
+    public void playSlash(AudioClip slash)
+    {
+        soundPlayer.clip = slash;
+        soundPlayer.Play();
     }
 }

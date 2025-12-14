@@ -16,6 +16,7 @@ public class attackBar : MonoBehaviour
     public int strongDamage; // if you land it near the box
     public int perfectDamage; // if you land it in the box
     private int damage;
+    public AudioClip slashSound;
     void Start()
     {
         enemy = GameObject.FindWithTag("Enemy");
@@ -45,6 +46,7 @@ public class attackBar : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Z) && canHit) // hit
         {
+            player.GetComponent<Player>().playSlash(slashSound);
             player.GetComponent<Animator>().Play("Slash");
             enemy.GetComponent<Boss>().TakeDamage(damage);
             player.GetComponent<Player>().TP += damage/8;
