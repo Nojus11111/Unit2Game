@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,7 +12,17 @@ public class GameManager : MonoBehaviour
     private bool finalAttacked = false;
     public int finalAttackThreshold;
     public AudioSource musicPlayer;
+    public AudioSource soundPlayer;
     public AudioClip music;
+    public AudioClip loseMusic;
+    public AudioClip winMusic;
+    public GameObject victoryScreen;
+    public GameObject loseScreen;
+    public GameObject brokenHeart;
+    public float musicDelay;
+    private float timer;
+    public GameObject battleBox;
+    public GameObject prompt;
     private void Start()
     {
         NEO = GameObject.FindWithTag("Enemy");
@@ -45,6 +56,52 @@ public class GameManager : MonoBehaviour
         if (turn > 4) // loops attacks
         {
             turn = 1;
+        }
+
+        if (GameObject.FindWithTag("Player").GetComponent<Player>().health <= 0)
+        {
+            if (!playerTurn)
+            {
+                Instantiate(brokenHeart, GameObject.FindWithTag("Soul").transform.position, GameObject.FindWithTag("Soul").transform.rotation);
+                musicPlayer.Stop();
+                battleBox.SetActive(false);
+            }
+            loseScreen.SetActive(true);
+            GameObject.FindWithTag("Player").GetComponent<Player>().enabled = false;
+            playerTurn = true;
+            timer += Time.deltaTime;
+            if (timer > musicDelay && !musicPlayer.isPlaying)
+            {
+                musicPlayer.clip = loseMusic;
+                musicPlayer.Play();
+                prompt.SetActive(true);
+            }
+            if (timer > musicDelay && Input.GetKey(KeyCode.Z))
+            {
+                SceneManager.LoadScene("SampleScene");
+            }
+        }
+        if (GameObject.FindWithTag("Enemy").GetComponent<Boss>().health <= 0)
+        {
+            musicPlayer.Stop();
+            if (!playerTurn)
+            {
+                soundPlayer.clip = winMusic;
+                soundPlayer.Play();
+                playerTurn = true;
+            }
+            GameObject.FindWithTag("Player").GetComponent<Player>().enabled = false;
+            victoryScreen.SetActive(true);
+            battleBox.SetActive(false);
+            timer += Time.deltaTime;
+            if (timer > musicDelay)
+            {
+                prompt.SetActive(true);
+            }
+            if (timer > musicDelay && Input.GetKey(KeyCode.Z))
+            {
+                SceneManager.LoadScene("SampleScene");
+            }
         }
     }
 }

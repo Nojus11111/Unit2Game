@@ -29,6 +29,9 @@ public class Boss : MonoBehaviour
     public Transform maxShake;
     private Transform target;
     public GameObject faceAttack;
+    public GameObject eyes;
+    public GameObject nose;
+    public GameObject mouth;
     public GameObject pipisCannon;
     public GameObject finalForme;
     [HideInInspector] public bool finalAttack;
@@ -110,7 +113,14 @@ public class Boss : MonoBehaviour
             {
                 faceAttack.SetActive(true);
                 attackStarted = true;
-                attackDuration = 8;
+                if (eyes.GetComponent<faceComponent>().health <= 0 && nose.GetComponent<faceComponent>().health <= 0 && mouth.GetComponent<faceComponent>().health <= 0)
+                {
+                    attackDuration = 2;
+                }
+                else
+                {
+                    attackDuration = 8;
+                }
             }
             if (!attackStarted && GameManager.GetComponent<GameManager>().turn == 4) // pipis attack
             {
