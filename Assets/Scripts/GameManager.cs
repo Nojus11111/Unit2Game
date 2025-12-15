@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
             turn = 1;
         }
 
-        if (GameObject.FindWithTag("Player").GetComponent<Player>().health <= 0)
+        if (GameObject.FindWithTag("Player").GetComponent<Player>().health <= 0) // game over screen
         {
             if (!playerTurn)
             {
@@ -76,12 +76,12 @@ public class GameManager : MonoBehaviour
                 musicPlayer.Play();
                 prompt.SetActive(true);
             }
-            if (timer > musicDelay && Input.GetKey(KeyCode.Z))
+            if (timer > musicDelay && Input.GetKey(KeyCode.Z)) // restarts the game by reloading the scene
             {
                 SceneManager.LoadScene("SampleScene");
             }
         }
-        if (GameObject.FindWithTag("Enemy").GetComponent<Boss>().health <= 0)
+        if (GameObject.FindWithTag("Enemy").GetComponent<Boss>().health <= 0) // victory screen
         {
             musicPlayer.Stop();
             if (!playerTurn)
