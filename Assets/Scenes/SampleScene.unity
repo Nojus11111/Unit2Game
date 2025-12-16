@@ -8041,7 +8041,7 @@ MonoBehaviour:
   playerTurn: 1
   turn: 1
   globalLight: {fileID: 619394801}
-  attackDim: 0.3
+  attackDim: 0.1
   finalAttackThreshold: 120
   musicPlayer: {fileID: 1824817255}
   soundPlayer: {fileID: 1824817256}
@@ -8438,7 +8438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loopPoint: {fileID: 1937698352}
-  loopSpeed: 0.6
+  loopSpeed: 1
 --- !u!212 &1858085829
 SpriteRenderer:
   m_ObjectHideFlags: 0
